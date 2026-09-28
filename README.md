@@ -71,3 +71,12 @@ export default defineConfig([
   },
 ])
 ```
+# Photo database setup
+
+Photos and their codes are stored in MongoDB. For local development, start a MongoDB server on `mongodb://127.0.0.1:27017` and run `pnpm install` and `pnpm dev:full` from this directory. The app uses the `photons` database by default; connect MongoDB Compass to `mongodb://127.0.0.1:27017` to view it. Set `MONGODB_URI` in the hosting environment when deploying to a remote database.
+
+Photo uploads are limited to 3 MB and support JPG, PNG, GIF, and WebP.
+
+## Deploy to Vercel
+
+Import this repository into Vercel, use `pnpm build` as the build command, and set the output directory to `dist`. Add `MONGODB_URI` as an environment variable for Production and Preview. The `api/photos` functions save and retrieve photos from Atlas. Configure the Atlas network access list to allow the Vercel function's outbound IP addresses before using the deployed upload flow.
